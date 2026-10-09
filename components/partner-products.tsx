@@ -4,23 +4,30 @@ import { useEffect, useState } from 'react'
 import { ArrowRight, MapPin, Phone, Tag } from 'lucide-react'
 import { storeProducts, type PartnerProduct } from '@/lib/partner-products'
 
-// Products of GRRR Care partners, published from /partenaires. The store sells none of them: each card leads
-// to the partner's own page, or shows where to find it. Hidden while there is nothing to show.
+// The "Partenaires" shelf: products of GRRR Care partners, published from /partenaires. The store sells none
+// of them: each card leads to the partner's own page, or shows where to find it, and its price is the
+// partner's, in euros (croquettes only pay for what GRRRR ships itself).
 export function PartnerProducts() {
-  const [products, setProducts] = useState<PartnerProduct[]>([])
+  const [products, setProducts] = useState<PartnerProduct[] | null>(null)
 
   useEffect(() => {
-    storeProducts<{ products: PartnerProduct[] }>({ action: 'list' }).then(({ products }) => setProducts(products)).catch(() => {})
+    storeProducts<{ products: PartnerProduct[] }>({ action: 'list' }).then(({ products }) => setProducts(products)).catch(() => setProducts([]))
   }, [])
 
-  if (products.length === 0) return null
+  if (!products) return <p className="py-10 text-center text-muted-foreground">Un instant…</p>
+  if (products.length === 0) {
+    return (
+      <div className="rounded-3xl border border-dashed border-border p-10 text-center">
+        <p className="text-lg font-black">Nos partenaires arrivent</p>
+        <p className="mx-auto mt-2 max-w-md text-sm leading-6 text-muted-foreground">Vétérinaires, animaleries et toiletteurs partenaires de GRRR Care proposeront bientôt leurs produits ici.</p>
+        <a href="/partenaires" className="mt-5 inline-flex items-center gap-2 text-sm font-bold text-primary">Vous êtes un professionnel ? <ArrowRight size={14} /></a>
+      </div>
+    )
+  }
 
   return (
-    <section id="partenaires" className="mx-auto max-w-7xl px-4 pb-14 sm:px-6 lg:px-10 lg:pb-20">
-      <div className="mb-8 flex flex-wrap items-end justify-between gap-4">
-        <div><p className="mb-2 text-sm font-black uppercase tracking-[0.18em] text-primary">Près de chez vous</p><h2 className="text-4xl font-black tracking-[-0.05em] sm:text-5xl">Chez nos partenaires</h2></div>
-        <p className="max-w-sm text-sm leading-6 text-muted-foreground">Sélectionnés chez les vétérinaires, animaleries et toiletteurs partenaires de GRRR Care. L’achat se fait directement chez eux.</p>
-      </div>
+    <>
+      <p className="mb-6 max-w-2xl text-sm leading-6 text-muted-foreground">Sélectionnés chez les vétérinaires, animaleries et toiletteurs partenaires de GRRR Care. L’achat se fait directement chez eux, au prix qu’ils indiquent.</p>
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {products.map((product) => {
           const partner = product.partner
@@ -49,6 +56,6 @@ export function PartnerProducts() {
           )
         })}
       </div>
-    </section>
+    </>
   )
 }
