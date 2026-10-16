@@ -42,7 +42,7 @@ const collections: Product[] = [
   { slug: 'parcours-chat', name: 'Parcours mural', note: 'Un terrain de jeu au mur, rien que pour lui.', image: '/products/parcours-chat-salon.jpg', croquettes: 300, tag: 'Pour les chats',
     details: 'Des plateformes à fixer au mur, reliées par des baguettes : votre chat grimpe, traverse, observe et se repose en hauteur. Version pont, pour des passages en lattes qui épousent les montées et descentes, ou version plateformes, pour des paliers plats. Le kit se recompose à l’envie, selon votre mur.',
     variants: ['Pont', 'Plateformes'], specs: ['5 plateformes rectangulaires et 10 baguettes de liaison', 'Vis et chevilles pour la fixation au mur', 'Une infinité de configurations'],
-    photos: { Pont: ['/products/parcours-chat-pont.jpg', '/products/parcours-chat-salon.jpg'], Plateformes: ['/products/parcours-chat-plateforme.jpg', '/products/parcours-chat-salon.jpg'] },
+    photos: { Pont: ['/products/parcours-chat-pont.jpg', '/products/parcours-chat-plateforme.jpg'], Plateformes: ['/products/parcours-chat-plateforme.jpg', '/products/parcours-chat-pont.jpg'] },
     option: { label: 'Couleur', choices: ['Beige', 'Marron', 'Noir', 'Gris', 'Blanc'] },
     extras: [
       { src: '/products/parcours-chat-salon.jpg', alt: 'Un chat traverse le parcours mural au-dessus d’un canapé' },
