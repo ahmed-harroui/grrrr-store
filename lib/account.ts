@@ -4,7 +4,7 @@ import { useCallback, useEffect, useState } from 'react'
 import { createClient, type Session } from '@supabase/supabase-js'
 
 // The store shares the accounts of the GRRRR apps (same Supabase project), and is paid in croquettes:
-// the treats the account's pets earn in the apps, which can also be bought. 1 croquette is worth 0,50 €.
+// the treats the account's pets earn in the apps, which can also be bought. 1 croquette is worth 0,25 €.
 const SUPABASE_URL = 'https://mfamxvbepohyeigpnsyi.supabase.co'
 // Publishable key: meant to be in the browser, the database's rules decide what it may read
 const SUPABASE_KEY = 'sb_publishable_5G4dWlVi6QbcC38UH-qOkg_L-6Xl1B1'

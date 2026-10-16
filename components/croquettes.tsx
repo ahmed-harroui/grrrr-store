@@ -109,13 +109,13 @@ export function WalletDialog({ session, balance, onClose }: { session: Session; 
         <img src="/croquette.png" alt="" className="h-14 w-auto" />
         <div><p className="text-4xl font-black leading-none">{balance ?? '…'}</p><p className="mt-1 text-sm font-bold text-muted-foreground">croquettes à dépenser</p></div>
       </div>
-      <p className="mt-4 text-sm leading-6 text-muted-foreground">Tes compagnons en gagnent dans les apps GRRRR et GRRR Care (cadeaux du jour, matchs, sorties). Tu peux aussi en acheter : 1 croquette = 0,50 €.</p>
+      <p className="mt-4 text-sm leading-6 text-muted-foreground">Tes compagnons en gagnent dans les apps GRRRR et GRRR Care (cadeaux du jour, matchs, sorties). Tu peux aussi en acheter : 10 € les 40 croquettes.</p>
 
       <h3 className="mt-6 text-lg font-black">Acheter des croquettes</h3>
       <div className="mt-3 grid gap-3">
         {packs.map((pack) => (
           <button key={pack.key} onClick={() => buy(pack)} disabled={!open || Boolean(busy)} className="flex items-center justify-between gap-3 rounded-2xl border border-border bg-card px-4 py-3 text-left hover:border-primary disabled:opacity-60 disabled:hover:border-border">
-            <span><Croquettes amount={pack.croquettes} className="text-lg" />{pack.croquettes > 100 && <span className="ml-2 rounded-full bg-mint px-2 py-0.5 text-xs font-black text-[#0f6b62]">10 offertes</span>}</span>
+            <span><Croquettes amount={pack.croquettes} className="text-lg" />{/(\d+) offertes/.exec(pack.label) && <span className="ml-2 rounded-full bg-mint px-2 py-0.5 text-xs font-black text-[#0f6b62]">{/(\d+) offertes/.exec(pack.label)![1]} offertes</span>}</span>
             <span className="font-black text-primary">{busy === pack.key ? '…' : pack.price}</span>
           </button>
         ))}
